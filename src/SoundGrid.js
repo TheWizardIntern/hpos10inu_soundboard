@@ -12,16 +12,19 @@ function SoundGrid() {
   const playAudio = useCallback((audioId) => {
     setCurrentlyPlaying(audioId);
   }, []);
-
+  console.log(JSON.parse(localStorage.getItem(localStorageKey)).length);
   useEffect(() => {
-    const savedSounds = JSON.parse(localStorage.getItem(localStorageKey)) || [
-      {
-        text: "President",
-        sound: sound1,
-        id: "sound1",
-        key: "sound1",
-      },
-    ];
+    const savedSounds =
+      JSON.parse(localStorage.getItem(localStorageKey)).length > 0
+        ? JSON.parse(localStorage.getItem(localStorageKey))
+        : [
+            {
+              text: "President",
+              sound: sound1,
+              id: "sound1",
+              key: "sound1",
+            },
+          ];
     setSoundSquareArr(savedSounds);
   }, []);
 

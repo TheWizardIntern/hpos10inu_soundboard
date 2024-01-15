@@ -55,8 +55,8 @@ function SoundSquare({
   const squareClass = isPlaying ? "grid-square playing" : "grid-square";
 
   return (
-    <div className={squareClass}>
-      <div onClick={togglePlayStop}>
+    <div className={squareClass} onClick={togglePlayStop}>
+      <div>
         {text || "Play Sound"}
         <audio ref={audioRef}>
           <source src={sound} type="audio/mpeg" />
