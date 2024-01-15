@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import SoundGrid from "./SoundGrid";
 
-function App() {
+const imageFolder = "/images";
+const logoImage = `${imageFolder}/sonic2.png`;
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Logo />
+      <Nav />
+      <SoundGrid />
     </div>
   );
 }
 
-export default App;
+function Nav() {
+  return <nav className="nav-bar">Nav Bar</nav>;
+}
+
+function Logo() {
+  return <img className="logo-image" src={logoImage} alt="Sonic" />;
+}
