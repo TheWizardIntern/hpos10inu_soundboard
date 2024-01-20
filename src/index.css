@@ -85,6 +85,18 @@ code {
   padding: 1.5rem;
 }
 
+@media (max-width: 1150px) {
+  .grid-column-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .grid-column-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .grid-square {
   position: relative;
   display: flex;
@@ -95,7 +107,7 @@ code {
   color: #eee;
   margin: 1.5rem;
   height: 10rem;
-  padding: 1rem;
+  padding: 1.5rem;
   transition: all 0.2s;
   border-radius: 0.2rem;
 }
@@ -106,4 +118,10 @@ code {
 
 .grid-square.playing {
   background-color: #44494b;
+}
+
+.timer {
+  position: absolute;
+  right: 5%;
+  top: 5%;
 }

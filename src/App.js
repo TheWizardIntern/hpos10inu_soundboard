@@ -51,6 +51,7 @@ function SoundGrid() {
 
 function SoundSquare({ text, sound, isPlaying, onPlay }) {
   const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
 
   const togglePlayStop = () => {
     const audio = audioRef.current;
@@ -80,18 +81,31 @@ function SoundSquare({ text, sound, isPlaying, onPlay }) {
 
   useEffect(() => {
     const audio = audioRef.current;
+    let intervalId;
+
     if (isPlaying) {
       audio.play();
+      setCurrentTime(audio.duration - audio.currentTime);
+
+      intervalId = setInterval(() => {
+        setCurrentTime(audio.duration - audio.currentTime);
+      }, 1000);
     } else {
       audio.pause();
       audio.currentTime = 0;
+      clearInterval(intervalId);
     }
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [isPlaying]);
 
   const squareClass = `grid-square ${isPlaying ? "playing" : ""}`;
 
   const getFontSize = (title) => {
-    return `${65 - title.length}px`;
+    return `${65 - title.length * 0.9}px`;
   };
 
   const squareStyle = {
@@ -101,9 +115,10 @@ function SoundSquare({ text, sound, isPlaying, onPlay }) {
   return (
     <div className={squareClass} onClick={togglePlayStop} style={squareStyle}>
       {text || "Play Sound"}
-      <audio ref={audioRef} preload="none">
+      <audio ref={audioRef} preload="metadata">
         <source src={sound} type="audio/mpeg" />
       </audio>
+      <div className="timer">{isPlaying && Math.floor(currentTime)}</div>
     </div>
   );
 }
